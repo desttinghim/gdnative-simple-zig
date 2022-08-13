@@ -1,60 +1,27 @@
 const c = @import("c.zig");
 const std = @import("std");
+const GD = @import("gdnative.zig");
 
-const GDNativeAPI = struct {
-    api: *const c.godot_gdnative_core_api_struct,
-    nativescript_api: *const c.godot_gdnative_ext_nativescript_api_struct,
+var gd: GD.NativeAPI = undefined;
 
-    pub fn init(p_options: *c.godot_gdnative_init_options) !GDNativeAPI {
-        const api: *const c.godot_gdnative_core_api_struct = p_options.api_struct;
-
-        // Find NativeScript extensions.
-        const nativescript_api = nativescript_api: {
-            const extensions = api.extensions[0..api.num_extensions];
-            for (extensions) |ext, i| {
-                const extension: *const c.godot_gdnative_api_struct = ext;
-                switch (extension.type) {
-                    c.GDNATIVE_EXT_NATIVESCRIPT => break :nativescript_api @ptrCast(*const c.godot_gdnative_ext_nativescript_api_struct, api.extensions[i]),
-                    else => {},
-                }
-            }
-            return error.MissingNativeScriptExtension;
-        };
-
-        return GDNativeAPI{
-            .api = api,
-            .nativescript_api = nativescript_api,
-        };
-    }
-
-    pub fn deinit(_: GDNativeAPI, p_options: *c.godot_gdnative_terminate_options) void {
-        _ = p_options;
-    }
-};
-
-var gd: GDNativeAPI = undefined;
-
-export fn godot_gdnative_init(p_options: *c.godot_gdnative_init_options) callconv(.C) void {
-    gd = GDNativeAPI.init(p_options) catch @panic("Could not initialize");
+export fn godot_gdnative_init(p_options: *GD.NativeAPI.InitOptions) callconv(.C) void {
+    gd = GD.NativeAPI.init(p_options) catch @panic("Could not initialize");
 }
 
 export fn godot_gdnative_terminate(p_options: *c.godot_gdnative_terminate_options) callconv(.C) void {
     gd.deinit(p_options);
 }
 
+export fn godot_nativescript_init(p_handle: *anyopaque) callconv(.C) void {
+    gd.setHandle(p_handle);
+
+    const simple = gd.registerClass("Simple", "Reference", constructor, destructor);
+    gd.registerMethod(simple, "get_data", get_data);
+}
+
 const UserData = struct {
     data: [256]u8,
 };
-
-export fn godot_nativescript_init(p_handle: *anyopaque) callconv(.C) void {
-    const builder = c.init_class_builder(gd.api, p_handle, "Simple", "Reference");
-    c.init_class_constructor(builder, constructor, null, null);
-    c.init_class_destructor(builder, destructor, null, null);
-    c.finalize_class(gd.api, gd.nativescript_api, builder);
-
-    const attributes: c.godot_method_attributes = .{ .rpc_type = c.GODOT_METHOD_RPC_MODE_DISABLED };
-    c.init_class_method(gd.nativescript_api, p_handle, "Simple", "get_data", attributes, get_data, null, null);
-}
 
 export fn constructor(p_instance: ?*c.godot_object, method_data: ?*anyopaque) callconv(.C) ?*anyopaque {
     _ = p_instance;
