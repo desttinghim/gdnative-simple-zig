@@ -1,5 +1,4 @@
 #include "simple.h"
-#include <string.h>
 
 struct ClassBuilder *init_class_builder(Api api, void *p_handle,
                                         const char *p_name,
