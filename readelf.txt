@@ -1,0 +1,36 @@
+
+Symbol table '.dynsym' contains 13 entries:
+   Num:    Value          Size Type    Bind   Vis      Ndx Name
+     0: 0000000000000000     0 NOTYPE  LOCAL  DEFAULT  UND 
+     1: 0000000000000000     0 NOTYPE  WEAK   DEFAULT  UND __gmon_start__
+     2: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND [...]@GLIBC_2.2.5 (2)
+     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __[...]@GLIBC_2.4 (3)
+     4: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND [...]@GLIBC_2.2.5 (2)
+     5: 0000000000001800   818 FUNC    GLOBAL DEFAULT   13 godot_gdnative_init
+     6: 0000000000004338     8 OBJECT  GLOBAL DEFAULT   18 nativescript_api
+     7: 0000000000001b70   481 FUNC    GLOBAL DEFAULT   13 godot_nativescri[...]
+     8: 0000000000001d60   214 FUNC    GLOBAL DEFAULT   13 simple_constructor
+     9: 0000000000004330     8 OBJECT  GLOBAL DEFAULT   18 api
+    10: 0000000000001b40    38 FUNC    GLOBAL DEFAULT   13 godot_gdnative_t[...]
+    11: 0000000000001e40   134 FUNC    GLOBAL DEFAULT   13 simple_destructor
+    12: 0000000000001ed0   589 FUNC    GLOBAL DEFAULT   13 simple_get_data
+
+Symbol table '.symtab' contains 17 entries:
+   Num:    Value          Size Type    Bind   Vis      Ndx Name
+     0: 0000000000000000     0 NOTYPE  LOCAL  DEFAULT  UND 
+     1: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS simple.c
+     2: 00000000000017dc     0 FUNC    LOCAL  HIDDEN    11 _init
+     3: 00000000000017f4     0 FUNC    LOCAL  HIDDEN    12 _fini
+     4: 0000000000003160     0 NOTYPE  LOCAL  HIDDEN    15 _DYNAMIC
+     5: 0000000000000000     0 NOTYPE  WEAK   DEFAULT  UND __gmon_start__
+     6: 0000000000001800   818 FUNC    GLOBAL DEFAULT   13 godot_gdnative_init
+     7: 0000000000004330     8 OBJECT  GLOBAL DEFAULT   18 api
+     8: 0000000000004338     8 OBJECT  GLOBAL DEFAULT   18 nativescript_api
+     9: 0000000000001b40    38 FUNC    GLOBAL DEFAULT   13 godot_gdnative_t[...]
+    10: 0000000000001b70   481 FUNC    GLOBAL DEFAULT   13 godot_nativescri[...]
+    11: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND memset
+    12: 0000000000001d60   214 FUNC    GLOBAL DEFAULT   13 simple_constructor
+    13: 0000000000001e40   134 FUNC    GLOBAL DEFAULT   13 simple_destructor
+    14: 0000000000001ed0   589 FUNC    GLOBAL DEFAULT   13 simple_get_data
+    15: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __stack_chk_fail
+    16: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND strcpy
